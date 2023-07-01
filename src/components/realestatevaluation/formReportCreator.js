@@ -26,7 +26,7 @@ function CreateResultDiv(formData) {
     maintenance_percentage,
   } = formData.formData;
 
-  const convertedFormData = {
+ /*  const convertedFormData = {
     sales_price: parseFloat(sales_price),
     current_rent_price: parseFloat(current_rent_price),
     market_rent_price: parseFloat(market_rent_price),
@@ -44,7 +44,7 @@ function CreateResultDiv(formData) {
     management_fees: parseFloat(management_fees),
     vacancy_percentage: parseFloat(vacancy_percentage),
     maintenance_percentage: parseFloat(maintenance_percentage),
-  };
+  }; */
 
   //constant variables.
   var closing_cost = Math.floor((closing_costs * sales_price) / 100);
