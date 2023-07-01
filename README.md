@@ -1,70 +1,54 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Small Business Tools
 
-## Available Scripts
+This project provides a collection of tools designed to assist small businesses in various aspects of their operations. The tools included in this project are:
 
-In the project directory, you can run:
+1. Register: This tool allows users to download a copy of the report for today's register closeout. It provides an easy way to keep track of daily sales and transactions.
 
-### `npm start`
+2. Price Calculator: With this tool, users can calculate the price of individual products based on the desired markup percentage. It simplifies the process of determining selling prices for products.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Real Estate Analysis Tools: This tool offers a set of features to analyze real estate properties. It provides valuable insights for property evaluation, including valuation calculations, market trends, and investment potential.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. Monthly Business Report: This tool generates a comprehensive monthly report for the business. It calculates various metrics and indicators, such as monthly gross sales, commission amounts, profit percentages, and overall business performance.
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository to your local machine:
 
-### `npm run build`
+```
+git clone https://github.com/your-username/small-business-tools.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install the necessary dependencies using npm:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+cd small-business-tools
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
 
-### `npm run eject`
+1. Register:
+   - Access the Register tool by navigating to the "Register" section of the application.
+   - Follow the on-screen instructions to download a copy of the report for today's register closeout.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Price Calculator:
+   - Use the Price Calculator tool by going to the "Price Calculator" section.
+   - Enter the product details and desired markup percentage.
+   - Click the "Calculate" button to get the calculated price.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Real Estate Analysis Tools:
+   - Explore the Real Estate Analysis Tools in the respective section.
+   - Use the provided features to evaluate real estate properties, analyze market trends, and assess investment opportunities.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Monthly Business Report:
+   - Access the Monthly Business Report tool in the "Reports" section.
+   - View the generated report with various metrics and indicators for the selected month.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Contributing
 
-## Learn More
+Contributions to this project are welcome. If you have any suggestions, improvements, or bug fixes, please submit a pull request. For major changes, please open an issue to discuss your ideas beforehand.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [MIT License](LICENSE).
