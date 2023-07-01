@@ -56,6 +56,7 @@ export default class PriceCalculator extends Component {
               <input
                 className="form-control align-middle text-center m-1"
                 type="number"
+                inputMode="numeric"
                 onChange={this.handleCostPrice}
               />
             </div>
@@ -68,6 +69,7 @@ export default class PriceCalculator extends Component {
               <input
                 className="form-control align-middle text-center m-1"
                 type="number"
+                inputMode="numeric"
                 onChange={this.handleQuantity}
               />
             </div>
@@ -80,6 +82,7 @@ export default class PriceCalculator extends Component {
               <input
                 className="form-control align-middle text-center m-1"
                 type="number"
+                inputMode="numeric"
                 onChange={this.handlePercentage}
               />
             </div>
