@@ -134,7 +134,7 @@ function CreateResultDiv(formData) {
     parseFloat(c_totalOperationExpenses);
   monthlyNet = monthlyNet.toFixed(2);
   var annualizedNet = monthlyNet * 12;
-  var annualizedNet = annualizedNet.toFixed(2);
+  annualizedNet = annualizedNet.toFixed(2);
   const annualizedROI = ((annualizedNet / downPayment) * 100).toFixed(2);
 
   //projected data.
