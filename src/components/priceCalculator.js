@@ -42,7 +42,7 @@ export default class PriceCalculator extends Component {
   render() {
     return (
       <div
-        className="container mx-auto my-4 shadow flex justify-center rounded text-center pb-4"
+        className="container mx-auto shadow flex justify-center rounded text-center pb-4"
         id="divElement"
       >
         <div className="text-center text-primary h-50">

@@ -45,3 +45,22 @@
   padding: 20px;
   border-radius: 4px;
 }
+
+
+.active-link {
+  color: #fff !important; /* Change the text color for active links */
+  background-color: #007bff; /* Change the background color for active links */
+  font-weight: bold; /* Add font weight or other styles as desired */
+  /* You can add more styles here to customize the appearance of active links */
+}
+
+/* Hover effect (optional) */
+.nav-link{
+  padding-inline: 10px !important;
+  border-radius: 10px;
+}
+
+.paddingForNavBottom{
+  padding-bottom: 125px;
+}
+

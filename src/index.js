@@ -1,13 +1,43 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import "./index.css";
-
-import App from "./components/app";
+import { RouterProvider, createBrowserRouter} from "react-router-dom";
+import RegisterClosing from "./components/register";
+import MenuBar from "./routes/root";
+import ErrorPage from "./routes/error-page";
+import RealestateValuation from "./components/realestatevaluation";
+import PriceCalculator from "./components/priceCalculator";
+import SalesForm from "./components/monthlyReportForm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MenuBar />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "",
+        element: <RegisterClosing />,
+      },
+      {
+        path: "sales",
+        element: <SalesForm />,
+      },
+      {
+        path: "price",
+        element: <PriceCalculator />,
+      },
+      {
+        path: "restate",
+        element: <RealestateValuation />,
+      },
+    ],
+  },
+]);
 root.render(
-  <div className="pb-5 container p-0">
-    <App />
-  </div>
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );

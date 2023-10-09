@@ -149,7 +149,7 @@ const RegisterClosing = () => {
 
   return (
     <>
-      <div className="container shadow py-2 rounded ">
+      <div className="container shadow py-2 rounded">
         <h1 className="text-center fw-bold text-info">Register</h1>
         <label className="fw-bold">Starting Balance:</label>
         <input
