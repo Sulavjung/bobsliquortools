@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import html2canvas from "html2canvas";
+import { addMyObjectToFirestore } from "../config/firestore";
+import Datepicker from "./partials/datepicker";
+import findValidBillCombination from "./partials/findValidBillCombination";
 
 const RegisterClosing = () => {
   const [bills, setBills] = useState([
@@ -20,6 +23,10 @@ const RegisterClosing = () => {
   const [todaysSale, setTodaysSale] = useState(0);
   const [showReport, setShowReport] = useState(false);
   const [askConfirm, setAskConfirm] = useState(false);
+  const [expectedDeposit, setExpectedDeposit] = useState(0);
+  const [grossSale, setGrossSale] = useState(0);
+  const [scratcher, setScratcher] = useState(0);
+  const [billsToKeepInRegister, setBillsToKeepInRegister] = useState([]);
   var data = {};
 
   const calculateTotalBalance = (callback) => {
@@ -49,25 +56,27 @@ const RegisterClosing = () => {
 
     console.log(data);
 
-    fetch("http://98.234.226.160:3006/api/add-object", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.error === "Data already exists") {
-          // Show confirmation dialog for update
-          setAskConfirm(true);
-        } else {
-          console.log("Error:", responseData.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error.message);
-      });
+    addMyObjectToFirestore(data);
+  };
+
+  const handleTips = () => {
+    const onesQuantity = bills.find((bill) => bill.name === "One").quantity;
+    const fivesQuantity = bills.find((bill) => bill.name === "Five").quantity;
+    const tensQuantity = bills.find((bill) => bill.name === "Ten").quantity;
+    const twentiesQuantity = bills.find(
+      (bill) => bill.name === "Twenty"
+    ).quantity;
+
+    const combination = findValidBillCombination(
+      onesQuantity,
+      fivesQuantity,
+      tensQuantity,
+      twentiesQuantity
+    );
+
+    console.log(combination);
+    setBillsToKeepInRegister(combination);
+    console.log(billsToKeepInRegister.length);
   };
 
   const handleConfirm = () => {
@@ -151,6 +160,7 @@ const RegisterClosing = () => {
     <>
       <div className="container shadow py-2 rounded">
         <h1 className="text-center fw-bold text-info">Register</h1>
+
         <label className="fw-bold">Starting Balance:</label>
         <input
           type="number"
@@ -160,6 +170,27 @@ const RegisterClosing = () => {
           onChange={(e) => setStartingBalance(parseInt(e.target.value))}
           prefix="$"
         />
+
+        <div className="d-flex align-items-center rounded border bg-danger text-light fw-medium p-4 py-2 mt-3">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              className="bi bi-exclamation-triangle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+              <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+            </svg>
+          </div>
+          <div className="ms-3 fs-6">
+            Warning: Do not go back or to another link. The filled data will be
+            removed.
+          </div>
+        </div>
+
         <br />
         <table className="table">
           <thead className="text-center">
@@ -181,9 +212,10 @@ const RegisterClosing = () => {
                     inputMode="numeric"
                     className="form-control text-center"
                     value={bill.quantity}
-                    onChange={(e) =>
-                      handleQuantityChange(index, parseInt(e.target.value))
-                    }
+                    onChange={(e) => {
+                      handleQuantityChange(index, parseInt(e.target.value));
+                      setShowReport(false);
+                    }}
                   />
                 </td>
                 <td>${(bill.value * bill.quantity).toFixed(2)}</td>
@@ -191,12 +223,67 @@ const RegisterClosing = () => {
             ))}
           </tbody>
         </table>
+        <table className="mb-3">
+          <tr className="fw-bold">
+            <td className="text-info" colSpan="2">
+              Expected Deposit:
+            </td>
+            <td>
+              <input
+                type="number"
+                inputMode="numeric"
+                className="form-control text-center"
+                value={expectedDeposit}
+                onChange={(e) => {
+                  setExpectedDeposit(e.target.value);
+                  setShowReport(false);
+                }}
+              />
+            </td>
+          </tr>
+          <tr className="fw-bold">
+            <td className="text-info" colSpan="2">
+              Gross Sale:
+            </td>
+            <td>
+              <input
+                type="number"
+                inputMode="numeric"
+                className="form-control text-center"
+                value={grossSale}
+                onChange={(e) => {
+                  setGrossSale(e.target.value);
+                  setShowReport(false);
+                }}
+              />
+            </td>
+          </tr>
+          <tr className="fw-bold">
+            <td className="text-info" colSpan="2">
+              Scratcher:
+            </td>
+            <td>
+              <input
+                type="number"
+                inputMode="numeric"
+                className="form-control text-center"
+                value={scratcher}
+                onChange={(e) => {
+                  setScratcher(e.target.value);
+                  setShowReport(false);
+                }}
+              />
+            </td>
+          </tr>
+        </table>
+
         <div className="row text-end">
           <div className="col">
             <button
               className="btn btn-outline-success"
               onClick={() => {
                 handleClosing();
+                handleTips();
                 setShowReport(true);
               }}
             >
@@ -208,8 +295,24 @@ const RegisterClosing = () => {
 
       {showReport && (
         <>
+          <div className="mt-5">
+            {billsToKeepInRegister !== -1 ? (
+              <div className="rounded border bg-info text-light fw-medium p-4 py-2 mt-3">
+                <p className="fw-bold fs-4">Tips:</p>
+                <p>You should leave the following bills in the register:</p>
+                <ul>
+                  <li>{billsToKeepInRegister.ones} - One dollar Bills.</li>
+                  <li>{billsToKeepInRegister.fives} - Five dollar Bills.</li>
+                  <li>{billsToKeepInRegister.tens} - Ten dollar Bills.</li>
+                  <li>{billsToKeepInRegister.twenties} - Twenty dollar Bills.</li>
+                </ul>
+
+              </div>
+            ) : null}
+          </div>
+
           <div
-            className="container py-4 rounded mt-5 neon-box"
+            className="container py-4 rounded mt-3  neon-box"
             id="downloadReport"
           >
             <div className="row">
@@ -251,17 +354,51 @@ const RegisterClosing = () => {
                       <td></td>
                       <td>${totalBalance.toFixed(2)}</td>
                     </tr>
-                    <tr className="fw-bold">
-                      <td className="text-info">Today's Sale:</td>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr className="fw-bold bg-">
+                      <td className="text-danger">Deposit:</td>
                       <td></td>
                       <td>${todaysSale.toFixed(2)}</td>
+                    </tr>
+                    <tr className="fw-bold">
+                      <td className="text-danger">Expected Deposit:</td>
+                      <td></td>
+                      <td>${expectedDeposit}</td>
+                    </tr>
+                    <tr className="fw-bold">
+                      <td className="text-danger">
+                        {todaysSale.toFixed(2) - expectedDeposit < 0
+                          ? "Under"
+                          : "Over"}
+                      </td>
+                      <td></td>
+                      <td>${todaysSale.toFixed(2) - expectedDeposit}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr className="fw-bold">
+                      <td className="text-success">Gross Sale</td>
+                      <td></td>
+                      <td>${grossSale}</td>
+                    </tr>
+                    <tr className="fw-bold">
+                      <td className="text-success">Scratcher</td>
+                      <td></td>
+                      <td>${scratcher}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-          <div></div>
+
           <div className="text-end mt-2 mb-5">
             <button
               className="btn btn-outline-success"
