@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth";
+/* import { onAuthStateChanged } from "firebase/auth";
 import { redirect } from "react-router-dom";
 import { auth } from "../config/firebase";
 
@@ -14,3 +14,4 @@ export async function user() {
 	  }
   }); 
 }
+ */

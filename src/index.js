@@ -8,8 +8,7 @@ import ErrorPage from "./routes/error-page";
 import RealestateValuation from "./components/realestatevaluation";
 import PriceCalculator from "./components/priceCalculator";
 import SalesForm from "./components/monthlyReportForm";
-import Login from "./components/pages/login";
-import Datepicker from "./components/partials/datepicker";
+
 
 
 
@@ -40,10 +39,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
+/*   {
     path: "/login",
     element: <Login />
-  }
+  } */
 ]);
 root.render(
   <React.StrictMode>

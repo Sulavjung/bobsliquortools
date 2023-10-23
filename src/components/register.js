@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import html2canvas from "html2canvas";
-import { addMyObjectToFirestore } from "../config/firestore";
-import Datepicker from "./partials/datepicker";
 import findValidBillCombination from "./partials/findValidBillCombination";
 
 const RegisterClosing = () => {
@@ -56,7 +54,7 @@ const RegisterClosing = () => {
 
     console.log(data);
 
-    addMyObjectToFirestore(data);
+
   };
 
   const handleTips = () => {

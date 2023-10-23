@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import "../index.css";
-import Profilebar from "../components/partials/profilebar";
+
 
 function MenuBar() {
   const location = useLocation();
@@ -11,7 +11,7 @@ function MenuBar() {
 
   return (
     <div className="container pt-3">
-      <Profilebar />
+
       <div className="paddingForNavBottom">
         <Outlet />
       </div>

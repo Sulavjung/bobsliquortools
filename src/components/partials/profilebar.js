@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+/* import React, { useEffect, useState } from 'react';
 import { auth } from '../../config/firebase';
 import { getAuth } from 'firebase/auth';
 
@@ -26,3 +26,4 @@ function Profilebar () {
 }
 
 export default Profilebar;
+ */

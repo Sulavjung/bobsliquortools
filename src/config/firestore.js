@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+/* import { collection, addDoc, getDocs } from "firebase/firestore";
 import { firestore } from "./firebase";
 
 export const addMyObjectToFirestore = async (data) => {
@@ -31,4 +31,4 @@ export const getMyObjectFromFirestore = async () => {
         console.error(err);
         return null;
     }
-}
+} */

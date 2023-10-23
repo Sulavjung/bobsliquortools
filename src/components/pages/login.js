@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+/* import React, { useEffect } from 'react';
 import { auth, googleProvider } from '../../config/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'
@@ -30,3 +30,4 @@ function Login() {
 }
 
 export default Login;
+ */

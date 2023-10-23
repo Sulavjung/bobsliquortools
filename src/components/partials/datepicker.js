@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import RegisterClosing from '../register';
 import { getMyObjectFromFirestore } from '../../config/firestore';
 
@@ -42,3 +42,4 @@ function Datepicker() {
 }
 
 export default Datepicker;
+ */
