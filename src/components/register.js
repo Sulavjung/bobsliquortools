@@ -4,16 +4,16 @@ import findValidBillCombination from "./partials/findValidBillCombination";
 
 const RegisterClosing = () => {
   const [bills, setBills] = useState([
-    { name: "Penny", value: 0.01, quantity: 0 },
-    { name: "Nickel", value: 0.05, quantity: 0 },
-    { name: "Dime", value: 0.1, quantity: 0 },
-    { name: "Quarter", value: 0.25, quantity: 0 },
-    { name: "One", value: 1, quantity: 0 },
-    { name: "Five", value: 5, quantity: 0 },
-    { name: "Ten", value: 10, quantity: 0 },
-    { name: "Twenty", value: 20, quantity: 0 },
-    { name: "Fifty", value: 50, quantity: 0 },
-    { name: "Hundred", value: 100, quantity: 0 },
+    { name: "Penny", value: 0.01, quantity: null },
+    { name: "Nickel", value: 0.05, quantity: null },
+    { name: "Dime", value: 0.1, quantity: null },
+    { name: "Quarter", value: 0.25, quantity: null },
+    { name: "One", value: 1, quantity: null },
+    { name: "Five", value: 5, quantity: null },
+    { name: "Ten", value: 10, quantity: null },
+    { name: "Twenty", value: 20, quantity: null },
+    { name: "Fifty", value: 50, quantity: null },
+    { name: "Hundred", value: 100, quantity: null },
   ]);
 
   const [startingBalance, setStartingBalance] = useState(300);
@@ -53,8 +53,6 @@ const RegisterClosing = () => {
     };
 
     console.log(data);
-
-
   };
 
   const handleTips = () => {
@@ -295,16 +293,53 @@ const RegisterClosing = () => {
         <>
           <div className="mt-5">
             {billsToKeepInRegister !== -1 ? (
-              <div className="rounded border bg-info text-light fw-medium p-4 py-2 mt-3">
+              <div className="rounded border bg-info text-white fw-bold p-4 py-2 mt-3">
                 <p className="fw-bold fs-4">Tips:</p>
-                <p>You should leave the following bills in the register:</p>
+                <p className="mb-1">
+                  You should leave the following bills in the register:
+                </p>
                 <ul>
                   <li>{billsToKeepInRegister.ones} - One dollar Bills.</li>
                   <li>{billsToKeepInRegister.fives} - Five dollar Bills.</li>
                   <li>{billsToKeepInRegister.tens} - Ten dollar Bills.</li>
-                  <li>{billsToKeepInRegister.twenties} - Twenty dollar Bills.</li>
+                  <li>
+                    {billsToKeepInRegister.twenties} - Twenty dollar Bills.
+                  </li>
                 </ul>
 
+                <p className="mb-1">
+                  You should have following bills for deposit:
+                </p>
+                <ul>
+                  {bills.map((bill, index) => {
+                    if (bill.quantity > 0) {
+                      return (
+                        <li>
+                          {bill.name === "One"
+                            ? bill.quantity - billsToKeepInRegister.ones
+                            : ""}
+                          {bill.name === "Five"
+                            ? bill.quantity - billsToKeepInRegister.fives
+                            : ""}
+                          {bill.name === "Ten"
+                            ? bill.quantity - billsToKeepInRegister.tens
+                            : ""}
+                          {bill.name === "twenties"
+                            ? bill.quantity - billsToKeepInRegister.twenties
+                            : ""}
+                          {bill.name !== "One" &&
+                          bill.name !== "Five" &&
+                          bill.name !== "Ten" &&
+                          bill.name !== "twenties"
+                            ? bill.quantity
+                            : ""}{" "}
+                          - {bill.name} dollar bills.
+                        </li>
+                      );
+                    }
+                    return null; // Skip rendering if quantity is zero
+                  })}
+                </ul>
               </div>
             ) : null}
           </div>
@@ -362,6 +397,45 @@ const RegisterClosing = () => {
                       <td></td>
                       <td>${todaysSale.toFixed(2)}</td>
                     </tr>
+                    {billsToKeepInRegister !== -1 ? (
+                    <tr>
+                      <td colSpan={3} className="px-4">
+                      <table className="table table-striped pb-0">
+                        {bills.map((bill, index) => {
+                          if (bill.quantity > 0) {
+                            return (
+                              <tr>
+                                <td>${bill.value} dollar bills</td>
+                                <td>
+                                  {bill.name === "One"
+                                    ? bill.quantity - billsToKeepInRegister.ones
+                                    : ""}
+                                  {bill.name === "Five"
+                                    ? bill.quantity -
+                                      billsToKeepInRegister.fives
+                                    : ""}
+                                  {bill.name === "Ten"
+                                    ? bill.quantity - billsToKeepInRegister.tens
+                                    : ""}
+                                  {bill.name === "twenties"
+                                    ? bill.quantity -
+                                      billsToKeepInRegister.twenties
+                                    : ""}
+                                  {bill.name !== "One" &&
+                                  bill.name !== "Five" &&
+                                  bill.name !== "Ten" &&
+                                  bill.name !== "twenties"
+                                    ? bill.quantity
+                                    : ""}
+                                </td>
+                              </tr>
+                            );
+                          }
+                          return null; // Skip rendering if quantity is zero
+                        })}
+                      </table>
+                      </td>
+                    </tr>) : ""}
                     <tr className="fw-bold">
                       <td className="text-danger">Expected Deposit:</td>
                       <td></td>
