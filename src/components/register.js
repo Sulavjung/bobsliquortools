@@ -21,9 +21,9 @@ const RegisterClosing = () => {
   const [todaysSale, setTodaysSale] = useState(0);
   const [showReport, setShowReport] = useState(false);
   const [askConfirm, setAskConfirm] = useState(false);
-  const [expectedDeposit, setExpectedDeposit] = useState(0);
-  const [grossSale, setGrossSale] = useState(0);
-  const [scratcher, setScratcher] = useState(0);
+  const [expectedDeposit, setExpectedDeposit] = useState(null);
+  const [grossSale, setGrossSale] = useState(null);
+  const [scratcher, setScratcher] = useState(null);
   const [billsToKeepInRegister, setBillsToKeepInRegister] = useState([]);
   var data = {};
 
@@ -324,13 +324,13 @@ const RegisterClosing = () => {
                           {bill.name === "Ten"
                             ? bill.quantity - billsToKeepInRegister.tens
                             : ""}
-                          {bill.name === "twenties"
+                          {bill.name === "Twenty"
                             ? bill.quantity - billsToKeepInRegister.twenties
                             : ""}
                           {bill.name !== "One" &&
                           bill.name !== "Five" &&
                           bill.name !== "Ten" &&
-                          bill.name !== "twenties"
+                          bill.name !== "Twenty"
                             ? bill.quantity
                             : ""}{" "}
                           - {bill.name} dollar bills.
@@ -417,14 +417,14 @@ const RegisterClosing = () => {
                                   {bill.name === "Ten"
                                     ? bill.quantity - billsToKeepInRegister.tens
                                     : ""}
-                                  {bill.name === "twenties"
+                                  {bill.name === "Twenty"
                                     ? bill.quantity -
                                       billsToKeepInRegister.twenties
                                     : ""}
                                   {bill.name !== "One" &&
                                   bill.name !== "Five" &&
                                   bill.name !== "Ten" &&
-                                  bill.name !== "twenties"
+                                  bill.name !== "Twenty"
                                     ? bill.quantity
                                     : ""}
                                 </td>
@@ -448,7 +448,7 @@ const RegisterClosing = () => {
                           : "Over"}
                       </td>
                       <td></td>
-                      <td>${todaysSale.toFixed(2) - expectedDeposit}</td>
+                      <td>${(todaysSale.toFixed(2) - expectedDeposit).toFixed(2)}</td>
                     </tr>
                     <tr>
                       <td></td>
